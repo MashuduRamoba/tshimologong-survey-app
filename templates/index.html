@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lifestyle Survey</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root {
+            --primary: #0052cc;
+            --primary-dark: #003d99;
+            --accent: #36b37e;
+            --bg: #f7f9fb;
+            --card-bg: #fff;
+            --border: #e5e8ec;
+            --text: #222;
+            --muted: #6b778c;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 650px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            padding: 40px 32px 32px 32px;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .nav h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0;
+        }
+        .nav button {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 22px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .nav button:hover {
+            background: #259c6c;
+        }
+        .form-section {
+            margin-bottom: 32px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border);
+        }
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        h2 {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin: 12px 0 8px 0;
+            font-weight: 500;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-top: 3px;
+            background: #f9fafb;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="date"]:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        .checkbox-group label {
+            display: inline-block;
+            margin-right: 18px;
+            font-weight: 400;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0 0 0;
+            background: #f9fafb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px 8px;
+            text-align: center;
+        }
+        th {
+            background: #f1f4f8;
+            color: var(--muted);
+            font-weight: 500;
+        }
+        tr td:first-child {
+            text-align: left;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+        button[type="submit"] {
+            width: 100%;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 18px;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(0,82,204,0.08);
+        }
+        button[type="submit"]:hover {
+            background: var(--primary-dark);
+        }
+        @media (max-width: 700px) {
+            .container { padding: 18px 6vw; }
+            .nav h1 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <h1>Lifestyle Preferences Survey</h1>
+            <a href="/results"><button type="button">View Results</button></a>
+        </div>
+
+        <form method="POST" action="/submit" onsubmit="return validateForm()">
+            <div class="form-section">
+                <h2>Personal Details</h2>
+                <label>Full Names:
+                    <input type="text" name="full_names" required>
+                </label>
+                <label>Email:
+                    <input type="email" name="email" required>
+                </label>
+                <label>Date of Birth:
+                    <input type="date" name="dob" required>
+                </label>
+                <label>Contact Number:
+                    <input type="tel" name="contact" required>
+                </label>
+            </div>
+
+            <div class="form-section">
+                <h2>What is your favorite food? <span style="font-weight:400;font-size:0.95em;color:var(--muted);">(Select all that apply)</span></h2>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="food" value="pizza"> Pizza</label>
+                    <label><input type="checkbox" name="food" value="pasta"> Pasta</label>
+                    <label><input type="checkbox" name="food" value="pap_wors"> Pap and Wors</label>
+                    <label><input type="checkbox" name="food" value="other"> Other</label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Please rate your level of agreement</h2>
+                <table>
+                    <tr>
+                        <th>Activity</th>
+                        <th>Strongly Agree<br>(1)</th>
+                        <th>Agree<br>(2)</th>
+                        <th>Neutral<br>(3)</th>
+                        <th>Disagree<br>(4)</th>
+                        <th>Strongly Disagree<br>(5)</th>
+                    </tr>
+                    <tr>
+                        <td>I like to watch movies</td>
+                        {% for i in range(1,6) %}
+                        <td><input type="radio" name="movies" value="{{ i }}" required></td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>I like to listen to radio</td>
+                        {% for i in range(1,6) %}
+                        <td><input type="radio" name="radio" value="{{ i }}" required></td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>I like to eat out</td>
+                        {% for i in range(1,6) %}
+                        <td><input type="radio" name="eat_out" value="{{ i }}" required></td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>I like to watch TV</td>
+                        {% for i in range(1,6) %}
+                        <td><input type="radio" name="tv" value="{{ i }}" required></td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+
+            <button type="submit">SUBMIT SURVEY</button>
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            // Validate at least one food selected
+            const foodCheckboxes = document.querySelectorAll('input[name="food"]:checked');
+            if (foodCheckboxes.length === 0) {
+                alert("Please select at least one favorite food");
+                return false;
+            }
+            return true;
+        }
+        // Set max date for 120 years ago and min for 5 years ago
+        const today = new Date();
+        const maxDate = new Date();
+        maxDate.setFullYear(today.getFullYear() - 120);
+        const minDate = new Date();
+        minDate.setFullYear(today.getFullYear() - 5);
+        document.querySelector('input[name="dob"]').max = minDate.toISOString().split('T')[0];
+        document.querySelector('input[name="dob"]').min = maxDate.toISOString().split('T')[0];
+    </script>
+</body>
+</html>

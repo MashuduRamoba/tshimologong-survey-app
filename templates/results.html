@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root {
+            --primary: #0052cc;
+            --primary-dark: #003d99;
+            --accent: #36b37e;
+            --bg: #f7f9fb;
+            --card-bg: #fff;
+            --border: #e5e8ec;
+            --text: #222;
+            --muted: #6b778c;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            padding: 40px 32px 32px 32px;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .nav h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0;
+        }
+        .nav button {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 22px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .nav button:hover {
+            background: #259c6c;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0 0 0;
+            background: #f9fafb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 14px 10px;
+            text-align: left;
+        }
+        th {
+            background: #f1f4f8;
+            color: var(--muted);
+            font-weight: 500;
+        }
+        .metric {
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: var(--muted);
+        }
+        @media (max-width: 700px) {
+            .container { padding: 18px 6vw; }
+            .nav h1 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <h1>Survey Results</h1>
+            <a href="/"><button type="button">Back to Survey</button></a>
+        </div>
+
+        {% if total == 0 %}
+            <div class="no-data">No Surveys Available</div>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td class="metric">Total number of surveys</td>
+                    <td>{{ total }}</td>
+                </tr>
+                <tr>
+                    <td class="metric">Average Age</td>
+                    <td>{{ avg_age }}</td>
+                </tr>
+                <tr>
+                    <td class="metric">Oldest person who participated</td>
+                    <td>{{ oldest }}</td>
+                </tr>
+                <tr>
+                    <td class="metric">Youngest person who participated</td>
+                    <td>{{ youngest }}</td>
+                </tr>
+                <tr>
+                    <td class="metric">Percentage who like Pizza</td>
+                    <td>{{ pizza_percent }}%</td>
+                </tr>
+                <tr>
+                    <td class="metric">Percentage who like Pasta</td>
+                    <td>{{ pasta_percent }}%</td>
+                </tr>
+                <tr>
+                    <td class="metric">Percentage who like Pap and Wors</td>
+                    <td>{{ pap_wors_percent }}%</td>
+                </tr>
+                <tr>
+                    <td class="metric">Average rating: Watching movies</td>
+                    <td>{{ movies_avg }}</td>
+                </tr>
+                <tr>
+                    <td class="metric">Average rating: Listening to radio</td>
+                    <td>{{ radio_avg }}</td>
+                </tr>
+                <tr>
+                    <td class="metric">Average rating: Eating out</td>
+                    <td>{{ eat_out_avg }}</td>
+                </tr>
+                <tr>
+                    <td class="metric">Average rating: Watching TV</td>
+                    <td>{{ tv_avg }}</td>
+                </tr>
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>
